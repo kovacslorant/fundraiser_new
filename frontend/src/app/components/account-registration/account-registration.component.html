@@ -1,0 +1,14 @@
+<div class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" formControlName="username" id="username">
+
+    </div>
+    <div class="mb-3">
+      <label for="goal" class="form-label">Goal</label>
+      <input type="text" class="form-control" formControlName="goal" id="goal">
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
