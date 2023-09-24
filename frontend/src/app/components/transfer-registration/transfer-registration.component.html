@@ -1,0 +1,52 @@
+<div class="container">
+  <form [formGroup]="transferForm" (ngSubmit)="sendTransfer()">
+    <div class="mb-3">
+      <label for="username"
+             class="form-label"
+             [ngClass]="{'text-danger':(transferForm.get('username')?.invalid)
+        && (transferForm.get('username')?.touched)
+        || (transferForm.get('username')?.errors?.['serverError'])}">
+        Username</label>
+      <input type="text"
+             class="form-control"
+             formControlName="username"
+             id="username"
+             [ngClass]="{'is-invalid':(transferForm.get('username')?.invalid)
+        && (transferForm.get('username')?.touched)
+        || (transferForm.get('username')?.errors?.['serverError'])}">
+      <small *ngIf="transferForm.get('username')?.invalid
+      && transferForm.get('username')?.touched
+      && !transferForm.get('username')?.errors?.['serverError']">
+        Please enter a valid name!
+      </small>
+      <small *ngIf="transferForm.get('username')?.errors?.['serverError']" class="text-danger">
+        {{transferForm.get("username")?.errors?.['serverError']}}
+      </small>
+
+    </div>
+    <div class="mb-3">
+      <label for="goal"
+             class="form-label"
+             [ngClass]="{'text-danger':(transferForm.get('goal')?.invalid)
+        && (transferForm.get('goal')?.touched)
+        || (transferForm.get('goal')?.errors?.['serverError'])}"
+      >Goal</label>
+      <input type="text"
+             class="form-control"
+             formControlName="goal"
+             id="goal"
+             [ngClass]="{'is-invalid':(transferForm.get('goal')?.invalid)
+        && (transferForm.get('goal')?.touched)
+        || (transferForm.get('goal')?.errors?.['serverError'])}">
+      <small *ngIf="transferForm.get('goal')?.invalid
+      && transferForm.get('goal')?.touched
+      && !transferForm.get('goal')?.errors?.['serverError']">
+        Please enter a goal!
+      </small>
+      <small *ngIf="transferForm.get('goal')?.errors?.['serverError']" class="text-danger">
+        {{transferForm.get("goal")?.errors?.['serverError']}}
+      </small>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>

@@ -8,13 +8,17 @@ import { AccountListComponent } from './components/account-list/account-list.com
 import { AccountRegistrationComponent } from './components/account-registration/account-registration.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { TransferRegistrationComponent } from './components/transfer-registration/transfer-registration.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     AccountListComponent,
-    AccountRegistrationComponent
+    AccountRegistrationComponent,
+    TransferRegistrationComponent,
+    AccountDetailsComponent
   ],
   imports: [
     BrowserModule,

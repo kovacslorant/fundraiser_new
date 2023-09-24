@@ -2,10 +2,14 @@ package com.example.fundraiser_new.service;
 
 import com.example.fundraiser_new.domain.Account;
 import com.example.fundraiser_new.dto.CreateAccountCommand;
+import com.example.fundraiser_new.dto.TargetAccountOption;
 import com.example.fundraiser_new.repository.AccountRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -36,6 +40,29 @@ public class AccountService {
         account.setGoal(command.getGoal());
         account.setBalance(5000);
         account.setFund(0);
+        return account;
+    }
+
+    public Account findAccountByIp(String remoteAddr){
+        return accountRepository.findAccountByIpAddress(remoteAddr);
+    }
+
+    public List<TargetAccountOption> getAllAccountsException(String remoteAddr) {
+        List<Account> accounts = accountRepository.findAll();
+        Account ownAccount = findAccountByIp(remoteAddr);
+        accounts.remove(remoteAddr);
+        List<TargetAccountOption> accountOptions = new ArrayList<>();
+        for (Account account : accounts){
+            TargetAccountOption option = new TargetAccountOption();
+            option.setId(account.getId());
+            option.setGoal(account.getGoal());
+            accountOptions.add(option);
+        }
+        return accountOptions;
+    }
+
+    public Account findById(Long id){
+        Account account = accountRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         return account;
     }
 }

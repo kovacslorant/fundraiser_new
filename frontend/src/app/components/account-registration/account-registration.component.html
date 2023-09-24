@@ -1,13 +1,51 @@
 <div class="container">
   <form [formGroup]="registerForm" (ngSubmit)="register()">
     <div class="mb-3">
-      <label for="username" class="form-label">Username</label>
-      <input type="text" class="form-control" formControlName="username" id="username">
+      <label for="username"
+             class="form-label"
+             [ngClass]="{'text-danger':(registerForm.get('username')?.invalid)
+        && (registerForm.get('username')?.touched)
+        || (registerForm.get('username')?.errors?.['serverError'])}">
+        Username</label>
+      <input type="text"
+             class="form-control"
+             formControlName="username"
+             id="username"
+             [ngClass]="{'is-invalid':(registerForm.get('username')?.invalid)
+        && (registerForm.get('username')?.touched)
+        || (registerForm.get('username')?.errors?.['serverError'])}">
+      <small *ngIf="registerForm.get('username')?.invalid
+      && registerForm.get('username')?.touched
+      && !registerForm.get('username')?.errors?.['serverError']">
+        Please enter a valid name!
+      </small>
+      <small *ngIf="registerForm.get('username')?.errors?.['serverError']" class="text-danger">
+        {{registerForm.get("username")?.errors?.['serverError']}}
+      </small>
 
     </div>
     <div class="mb-3">
-      <label for="goal" class="form-label">Goal</label>
-      <input type="text" class="form-control" formControlName="goal" id="goal">
+      <label for="goal"
+             class="form-label"
+             [ngClass]="{'text-danger':(registerForm.get('goal')?.invalid)
+        && (registerForm.get('goal')?.touched)
+        || (registerForm.get('goal')?.errors?.['serverError'])}"
+      >Goal</label>
+      <input type="text"
+             class="form-control"
+             formControlName="goal"
+             id="goal"
+             [ngClass]="{'is-invalid':(registerForm.get('goal')?.invalid)
+        && (registerForm.get('goal')?.touched)
+        || (registerForm.get('goal')?.errors?.['serverError'])}">
+      <small *ngIf="registerForm.get('goal')?.invalid
+      && registerForm.get('goal')?.touched
+      && !registerForm.get('goal')?.errors?.['serverError']">
+        Please enter a goal!
+      </small>
+      <small *ngIf="registerForm.get('goal')?.errors?.['serverError']" class="text-danger">
+        {{registerForm.get("goal")?.errors?.['serverError']}}
+      </small>
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
   </form>

@@ -26,7 +26,8 @@ export class AccountRegistrationComponent implements OnInit{
   register() {
     const formData: CreateAccountCommandModel = this.registerForm.value;
     this.accountService.registerAccount(formData).subscribe({
-      error:err => console.error(err)
+      error:err => console.error(err),
+      complete: () => this.registerForm.reset()
     })
   }
 }
